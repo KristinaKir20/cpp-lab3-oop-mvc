@@ -40,9 +40,11 @@ class NumbersModel:
     def set_a(self, value):
         """Разрешающее поведение: A сохраняется, B и C подстраиваются."""
         new_a = self._clamp(value)
-        new_b = max(self._b, new_a)
-        new_c = max(self._c, new_b)
-        return self._apply(new_a, new_b, new_c)
+        # new_b = max(self._b, new_a)
+        # new_c = max(self._c, new_b)
+        if value < self._b or value > self._c:
+            return False
+        return self._apply(new_a, self._b,self._c)
 
     def set_c(self, value):
         """Разрешающее поведение: C сохраняется, A и B подстраиваются."""
